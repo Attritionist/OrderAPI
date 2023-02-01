@@ -1,5 +1,5 @@
 ﻿using OrderAPI.Data;
-using PokemonReviewApp.Models;
+using OrderAPI.Models;
 
 namespace OrderAPI
 {

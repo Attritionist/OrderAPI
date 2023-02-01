@@ -1,4 +1,4 @@
-﻿namespace PokemonReviewApp.Models
+﻿namespace OrderAPI.Models
 {
     public class Customer
     {
