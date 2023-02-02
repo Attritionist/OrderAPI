@@ -11,7 +11,7 @@ using OrderAPI.Data;
 namespace OrderAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230201185238_InitialCreate")]
+    [Migration("20230201223031_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,7 +24,7 @@ namespace OrderAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("PokemonReviewApp.Models.Address", b =>
+            modelBuilder.Entity("OrderAPI.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +54,7 @@ namespace OrderAPI.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("PokemonReviewApp.Models.Customer", b =>
+            modelBuilder.Entity("OrderAPI.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,16 +70,15 @@ namespace OrderAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("PhoneNumber")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("PokemonReviewApp.Models.Order", b =>
+            modelBuilder.Entity("OrderAPI.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,20 +110,20 @@ namespace OrderAPI.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("PokemonReviewApp.Models.Address", b =>
+            modelBuilder.Entity("OrderAPI.Models.Address", b =>
                 {
-                    b.HasOne("PokemonReviewApp.Models.Customer", "Customer")
+                    b.HasOne("OrderAPI.Models.Customer", "Customer")
                         .WithOne("Address")
-                        .HasForeignKey("PokemonReviewApp.Models.Address", "CustomerId")
+                        .HasForeignKey("OrderAPI.Models.Address", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("PokemonReviewApp.Models.Order", b =>
+            modelBuilder.Entity("OrderAPI.Models.Order", b =>
                 {
-                    b.HasOne("PokemonReviewApp.Models.Customer", "Customer")
+                    b.HasOne("OrderAPI.Models.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -133,7 +132,7 @@ namespace OrderAPI.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("PokemonReviewApp.Models.Customer", b =>
+            modelBuilder.Entity("OrderAPI.Models.Customer", b =>
                 {
                     b.Navigation("Address")
                         .IsRequired();

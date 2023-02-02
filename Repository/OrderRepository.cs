@@ -1,6 +1,11 @@
-﻿using OrderAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderAPI.Data;
 using OrderAPI.Interfaces;
 using OrderAPI.Models;
+using System.IO;
+using System.Linq;
+using System.Numerics;
+using System.Reflection.Emit;
 
 namespace OrderAPI.Repository
 {
@@ -11,10 +16,23 @@ namespace OrderAPI.Repository
         {
             _context = context;
         }
-
-        public ICollection<Customer> GetCustomers()
+        //Multiple Orders
+        public ICollection<Order> GetOrders()
         {
-            return _context.Customers.OrderBy(p => p.Id).ToList();
+            return _context.Orders.OrderBy(o => o.Id).ToList();
+        }
+        //Singular Order
+        public Order GetOrderById(int id)
+        {
+            return _context.Orders.Where(o => o.Id == id).FirstOrDefault();
+        }
+        public Order GetOrderByOrderNo(int id)
+        {
+            return _context.Orders.Where(o => o.OrderNumber == id).FirstOrDefault();
+        }
+        public bool OrderExists(int id)
+        {
+            return _context.Orders.Any(o => o.Id == id);
         }
     }
 }

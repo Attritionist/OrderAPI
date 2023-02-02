@@ -4,7 +4,11 @@ namespace OrderAPI.Interfaces
 {
     public interface IOrderRepository
     {
-        ICollection<Customer> GetCustomers();
+        ICollection<Order> GetOrders();
+        Order GetOrderById(int id);
+        Order GetOrderByOrderNo(int id);
+        bool OrderExists(int id);
+
 
     }
 }

@@ -20,7 +20,7 @@ namespace OrderAPI
                     {
                     FirstName = "Okan",
                     LastName = "Ugur",
-                    PhoneNumber = "5301234567",
+                    PhoneNumber = 5301234567,
                     Address = new Address
                     {
                         City = "İzmir",
@@ -46,10 +46,10 @@ namespace OrderAPI
                     }
                 },
                 new Customer
-                {
+                {   
                     FirstName = "Ramazan",
                     LastName = "Yavuz",
-                    PhoneNumber = "5307654321",
+                    PhoneNumber = 5307654321,
                     Address = new Address
                     {
                         City = "Antalya",
