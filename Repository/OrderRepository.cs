@@ -21,6 +21,11 @@ namespace OrderAPI.Repository
         {
             return _context.Orders.OrderBy(o => o.Id).ToList();
         }
+        public ICollection<Order> GetOrdersByName(string firstname, string lastname)
+        {
+            return _context.Orders.OrderBy(o => o.Id).Where(o => o.Customer.FirstName == firstname && o.Customer.LastName == lastname).ToList();
+        }
+
         //Singular Order
         public Order GetOrderById(int id)
         {

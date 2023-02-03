@@ -10,32 +10,25 @@ namespace OrderAPI.Controllers
     {
         private readonly ICustomerRepository _addressRepository;
 
-        public AddressController(ICustomerRepository orderRepository1)
+        public AddressController(ICustomerRepository addressRepository1)
         {
-            _addressRepository = orderRepository1;
+            _addressRepository = addressRepository1;
         }
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Customer>))]
-        public IActionResult GetCustomers()
-        {
-            var customers = _addressRepository.GetCustomers();
-            if (!ModelState.IsValid) 
-                return BadRequest(ModelState);
-                return Ok(customers);       
-        }
 
-        [HttpGet("{customerId}/Address")]
-        [ProducesResponseType(200, Type = typeof(Customer))]
+        [HttpGet("{firstname}/lastname")]
+        [ProducesResponseType(200, Type = typeof(Address))]
         [ProducesResponseType(400)]
-        public IActionResult GetCustomerNameByAddress(int customerId, string city, string street, int zipcode)
+        public ActionResult<Address> GetAddressByName(string firstname, string lastname)
         {
-            if (!_addressRepository.CustomerExists(customerId))
+            var customer = _addressRepository.GetCustomerByName(firstname, lastname);
+            if (customer == null)
+            {
                 return NotFound();
-            var customeraddress = _addressRepository.GetCustomerNameByAddress(city,street,zipcode);
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            return Ok(customeraddress);
-        }
+            }
 
+            return Ok(customer.Address);
+        }
     }
 }

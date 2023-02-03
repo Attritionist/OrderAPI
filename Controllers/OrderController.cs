@@ -40,5 +40,17 @@ namespace OrderAPI.Controllers
                 return BadRequest(ModelState);
             return Ok(orders);
         }
+        [HttpGet("OrdersBy/{firstName}/{lastName}")]
+        [ProducesResponseType(200, Type = typeof(Order))]
+        [ProducesResponseType(400)]
+        public ActionResult<List<Order>> GetOrdersByName(string firstName, string lastName)
+        {
+            var orders = _orderRepository.GetOrdersByName(firstName, lastName);
+            if (orders == null)
+            {
+                return NotFound();
+            }
+            return Ok(orders);
+        }
     }
 }

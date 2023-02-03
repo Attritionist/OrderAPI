@@ -25,7 +25,7 @@ namespace OrderAPI
                     {
                         City = "İzmir",
                         Street = "3rd Good Coders Street",
-                        ZipCode = 35600
+                        ZipCode = "35600"
                     },
                     Orders = new List<Order>
                     {
@@ -54,7 +54,7 @@ namespace OrderAPI
                     {
                         City = "Antalya",
                         Street = "Based Street",
-                        ZipCode = 07090
+                        ZipCode = "07090"
                     },
                     Orders = new List<Order>
                     {

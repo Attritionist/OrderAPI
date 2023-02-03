@@ -29,12 +29,11 @@ namespace OrderAPI.Repository
         public Customer GetCustomerByName(string firstname, string lastname)
         {
             return _context.Customers.Where(c => c.FirstName == firstname && c.LastName == lastname).FirstOrDefault();
+
         }
-        public Customer GetCustomerNameByAddress(string city, string street, int zipcode)
+        public Customer GetCustomerNameByAddress(string city, string street, string zipcode)
         {
-            return _context.Customers
-                .Include(c => c.Address)
-                .FirstOrDefault(c => c.Address.City == city && c.Address.Street == street && c.Address.ZipCode == zipcode);
+            return _context.Customers.Where(c => c.Address.City == city && c.Address.Street == street && c.Address.ZipCode == zipcode).FirstOrDefault();
         }
 
         public bool CustomerExists(int id)
